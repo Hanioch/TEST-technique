@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model liste_cours {
+  mnemonique  String?       @id
+  intitule    String
+  credit      Int
+  titulaire   String
+  liste_notes liste_notes[]
+
+  @@ignore
+}
+
+model liste_inscriptions {
+  matricule   String
+  nom         String
+  prenom      String
+  annee_etude Int
+  cours_json  String
+
+  @@id([matricule, annee_etude])
+}
+
+model liste_notes {
+  id          Int         @id @default(autoincrement())
+  matricule   String
+  mnemonique  String
+  note        Int
+  liste_cours liste_cours @relation(fields: [mnemonique], references: [mnemonique], onDelete: NoAction, onUpdate: NoAction) @ignore
+}
