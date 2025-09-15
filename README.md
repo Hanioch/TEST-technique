@@ -31,7 +31,11 @@
    # ou
    yarn dev
    
-   
+## 🛠️ Outils utilisés
+- **ChatGPT** : génération rapide de contenu (README, exemples de code), demandes d’explications pour certaines fonctions et conseils sur l’organisation générale du projet.  
+- **Visual Studio Code (VSCode)** : IDE principal pour le développement, avec des extensions TypeScript, Prisma et Tailwind pour gagner en productivité.  
+- **Prisma Studio** : interface visuelle pour consulter et manipuler les données de la base SQLite.  
+- **Postman / Thunder Client** : tests rapides des endpoints API.  
 
 ## 🚀 Stack Technique
 
@@ -71,7 +75,6 @@
 - **Postman** – tests manuels des routes.  
 
 ---
-
 
 ## ✨ Pourquoi cette stack ?
 - **Next.js** → framework avec lequelle je suis le plus à l'aise.
