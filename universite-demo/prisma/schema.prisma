@@ -8,15 +8,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model liste_cours {
-  mnemonique  String?       @id
-  intitule    String
-  credit      Int
-  titulaire   String
-  liste_notes liste_notes[]
-
-  @@ignore
+  mnemonique String @id
+  intitule   String
+  credit     Int
+  titulaire  String
 }
 
 model liste_inscriptions {
@@ -30,9 +26,8 @@ model liste_inscriptions {
 }
 
 model liste_notes {
-  id          Int         @id @default(autoincrement())
-  matricule   String
-  mnemonique  String
-  note        Int
-  liste_cours liste_cours @relation(fields: [mnemonique], references: [mnemonique], onDelete: NoAction, onUpdate: NoAction) @ignore
+  id         Int    @id @default(autoincrement())
+  matricule  String
+  mnemonique String
+  note       Int
 }
