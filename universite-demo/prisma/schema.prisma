@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model liste_cours {
+  mnemonique String @id
+  intitule   String
+  credit     Int
+  titulaire  String
+}
+
+model liste_inscriptions {
+  matricule   String
+  nom         String
+  prenom      String
+  annee_etude Int
+  cours_json  String
+
+  @@id([matricule, annee_etude])
+}
+
+model liste_notes {
+  id         Int    @id @default(autoincrement())
+  matricule  String
+  mnemonique String
+  note       Int
+}

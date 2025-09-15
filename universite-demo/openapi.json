@@ -1,0 +1,95 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Université Demo API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/inscriptions": {
+      "get": {
+        "summary": "Liste des inscriptions",
+        "responses": {
+          "200": {
+            "description": "Liste des inscriptions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Inscription" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cours": {
+      "get": {
+        "summary": "Liste des cours",
+        "responses": {
+          "200": {
+            "description": "Liste des cours",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Cours" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/notes": {
+      "get": {
+        "summary": "Liste des notes",
+        "responses": {
+          "200": {
+            "description": "Liste des notes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Note" }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Inscription": {
+        "type": "object",
+        "properties": {
+          "matricule": { "type": "string" },
+          "nom": { "type": "string" },
+          "prenom": { "type": "string" },
+          "annee_etude": { "type": "integer" },
+          "cours_json": { "type": "string" }
+        }
+      },
+      "Cours": {
+        "type": "object",
+        "properties": {
+          "mnemonique": { "type": "string" },
+          "intitule": { "type": "string" },
+          "credit": { "type": "integer" },
+          "titulaire": { "type": "string" }
+        }
+      },
+      "Note": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "matricule": { "type": "string" },
+          "mnemonique": { "type": "string" },
+          "note": { "type": "integer" }
+        }
+      }
+    }
+  }
+}
