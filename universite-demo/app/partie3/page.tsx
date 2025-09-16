@@ -96,7 +96,7 @@ export default function Partie3() {
                     </TabsList>
                 </div>
 
-                <TabsContent value="bulletins" className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <TabsContent value="bulletins" className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  items-start">
                     {bulletins?.map((b: any) => (
                         <Card key={`${b.matricule}-${b.annee}`} className="overflow-hidden">
                             <CardHeader>
