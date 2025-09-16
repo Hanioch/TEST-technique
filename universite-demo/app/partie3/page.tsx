@@ -173,7 +173,6 @@ export default function Partie3() {
                     ))}
                 </TabsContent>
 
-                {/* Onglet Anomalies */}
                 <TabsContent value="anomalies" className="space-y-4">
                     {anomalies?.map((a: any, idx: number) => (
                         <Card key={idx}>
