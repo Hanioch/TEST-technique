@@ -1,6 +1,6 @@
 # 📘 Projet – Épreuve technique (Université Demo)
 
-## Architecture
+## Développement
 Ce projet a été réalisé en utilisant Next.js, tant pour le backend que pour le frontend, avec Prisma pour la gestion de la base de données.
 
 ### Partie 1
@@ -57,9 +57,10 @@ NEXT_PUBLIC_API_BASE_URL=https://b0s0kwos00g48ow8cg0skg4w.89.116.111.143.sslip.i
   - Tabs : permet de naviguer entre différentes fenêtres (une pour chaque table).  
   - Accordion : permet d’agrandir les bulletins pour afficher les détails.  
   - ScrollArea et ScrollBar : améliorent la gestion du responsive, notamment pour éviter des bugs avec les tabs sur téléphone.
+5. Ajout de filtre et de trie visuel.
 
 **Limitation de temps** :  
-L’ajout du composant DataTable de shadcn, qui intègre une barre de recherche pour filtrer les valeurs des inscriptions, notes et cours, n’a pas pu être réalisé.
+L’ajout du composant DataTable de shadcn, qui intègre une barre de recherche pour filtrer les valeurs des inscriptions, notes et cours, directement avec l'api n’a pas pu être réalisé.
 
 ## ▶️ Comment démarrer le projet
 
