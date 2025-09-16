@@ -73,16 +73,28 @@ export default function Partie3() {
             <h1 className="text-2xl font-bold mb-6">📊 Tableau de bord</h1>
 
             <Tabs defaultValue="bulletins" >
-                <ScrollArea className=" overflow-x-scroll  w-full  whitespace-nowrap">
-                    <TabsList className="flex w-max space-x-2">
+                <div className="md:hidden">
+                    <ScrollArea className="overflow-x-auto w-full whitespace-nowrap">
+                        <TabsList className="flex w-max space-x-2">
+                            <TabsTrigger value="bulletins">Bulletins</TabsTrigger>
+                            <TabsTrigger value="inscriptions">Inscriptions</TabsTrigger>
+                            <TabsTrigger value="notes">Notes</TabsTrigger>
+                            <TabsTrigger value="cours">Cours</TabsTrigger>
+                            <TabsTrigger value="anomalies">Anomalies</TabsTrigger>
+                        </TabsList>
+                        <ScrollBar orientation="horizontal" />
+                    </ScrollArea>
+                </div>
+
+                <div className="hidden md:block">
+                    <TabsList className="grid grid-cols-5 gap-2 w-full">
                         <TabsTrigger value="bulletins">Bulletins</TabsTrigger>
                         <TabsTrigger value="inscriptions">Inscriptions</TabsTrigger>
                         <TabsTrigger value="notes">Notes</TabsTrigger>
                         <TabsTrigger value="cours">Cours</TabsTrigger>
                         <TabsTrigger value="anomalies">Anomalies</TabsTrigger>
                     </TabsList>
-                    <ScrollBar orientation="horizontal" />
-                </ScrollArea>
+                </div>
 
                 <TabsContent value="bulletins" className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {bulletins?.map((b: any) => (
