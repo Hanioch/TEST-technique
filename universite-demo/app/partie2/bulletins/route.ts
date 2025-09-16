@@ -61,9 +61,12 @@ export async function GET() {
       const notesAvecCredits = details.filter((d) => d.note !== null);
       const moyenne_ponderee =
         notesAvecCredits.length > 0
-          ? notesAvecCredits.reduce((acc, d) => acc + d.note! * d.credit, 0) /
-            notesAvecCredits.reduce((acc, d) => acc + d.credit, 0)
+          ? parseFloat((
+              notesAvecCredits.reduce((acc, d) => acc + d.note! * d.credit, 0) /
+              notesAvecCredits.reduce((acc, d) => acc + d.credit, 0)
+            ).toFixed(2))
           : null;
+
 
       const reussite =
         ects_obtenus >= 60 ||
