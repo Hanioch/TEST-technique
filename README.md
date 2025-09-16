@@ -1,5 +1,42 @@
 # 📘 Projet – Épreuve technique (Université Demo)
 
+## ▶️ Comment démarrer le projet
+
+1. Installer les dépendances :  
+   ```bash
+   npm install
+   # ou
+   pnpm install
+   # ou
+   yarn install
+   
+2. Générer le client API avec Orval :  
+   ```bash
+   npm run orval
+   # ou
+   pnpm orval
+   # ou
+   yarn orval
+   
+3. Générer et appliquer les migrations Prisma : 
+   ```bash
+   npx prisma generate
+   npx prisma migrate dev
+
+4. Lancer le projet :
+   ```bash
+   npm run dev
+   # ou
+   pnpm dev
+   # ou
+   yarn dev
+   
+## 🛠️ Outils utilisés
+- **ChatGPT** : génération rapide de contenu (README, exemples de code), demandes d’explications pour certaines fonctions et conseils sur l’organisation générale du projet.  
+- **Visual Studio Code (VSCode)** : IDE principal pour le développement, avec des extensions TypeScript, Prisma et Tailwind pour gagner en productivité.  
+- **Prisma Studio** : interface visuelle pour consulter et manipuler les données de la base SQLite.  
+- **Postman / Thunder Client** : tests rapides des endpoints API.  
+
 ## 🚀 Stack Technique
 
 ### **Langage & Framework**
@@ -33,38 +70,10 @@
 - **xlsx** – export Excel des bulletins.  
 - **date-fns** – manipulation des dates.  
 
-### **Tests & Qualité**
-- **Jest** – tests unitaires.  
-- **React Testing Library** – tests de composants.  
-- **ESLint + Prettier** – qualité et cohérence du code.  
-
 ### **Documentation**
 - **Swagger / OpenAPI** – documentation des endpoints API.  
 - **Postman** – tests manuels des routes.  
 
----
-
-## 🗂️ Organisation du Projet (prévue)
-📦 universite-demo
-┣ 📂 prisma            # Schéma et migrations Prisma
-┣ 📂 src
-┃ ┣ 📂 app
-┃ ┃ ┣ 📂 api
-┃ ┃ ┃ ┣ 📂 inscriptions   # Endpoints API (Next.js)
-┃ ┃ ┃ ┣ 📂 cours
-┃ ┃ ┃ ┣ 📂 notes
-┃ ┃ ┃ ┗ 📂 bulletins
-┃ ┃ ┣ 📂 (frontend pages & UI components)
-┃ ┣ 📂 components     # Composants UI (shadcn, formulaires, tables, etc.)
-┃ ┣ 📂 lib            # Fonctions utilitaires (validation, calculs ECTS, etc.)
-┃ ┣ 📂 services       # Clients API générés par Orval
-┃ ┗ 📂 hooks          # Hooks React (useBulletins, useAnomalies, etc.)
-┣ 📂 tests            # Tests unitaires & e2e
-┣ .eslintrc.json
-┣ package.json
-┣ tsconfig.json
-┣ README.md
-┗ schema.prisma
 ---
 
 ## ✨ Pourquoi cette stack ?
@@ -72,6 +81,3 @@
 - **Prisma** → solutions la plus adapté au vue de mes connaissances.  
 - **Orval + React Query** → automatisation + gestion propre des appels API.  
 - **shadcn/ui + Tailwind** → UI cohérente, responsive, pro et rapide à mettre en place.  
-- **Zod + RHF** → validation fiable et formulaires ergonomiques.  
-- **papaparse/xlsx** → production de bulletins en formats standards (CSV/Excel).  
-- **Tests + CI/CD** → montre la rigueur et la qualité.  
