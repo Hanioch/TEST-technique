@@ -64,7 +64,11 @@ L’ajout du composant DataTable de shadcn, qui intègre une barre de recherche 
 
 ## ▶️ Comment démarrer le projet
 
-1. Installer les dépendances :  
+1. Entrer dans le dossier "universite-demo"
+    ```bash
+    cd universite-demo
+    ```
+2. Installer les dépendances :
    ```bash
    npm install
    # ou
@@ -72,25 +76,17 @@ L’ajout du composant DataTable de shadcn, qui intègre une barre de recherche 
    # ou
    yarn install
    ```
-2. Créer un fichier .env à la racine du projet universite-demo avec les variables suivantes :  
+3. Créer un fichier .env à la racine du projet universite-demo avec les variables suivantes :  
 ```
 DATABASE_URL="file:./universite_demo.sqlite"
 NEXT_PUBLIC_API_BASE_URL=https://b0s0kwos00g48ow8cg0skg4w.89.116.111.143.sslip.io
 ```
-3. Générer le client API avec Orval :  
-   ```bash
-   npm run orval
-   # ou
-   pnpm orval
-   # ou
-   yarn orval
-   ```
-4. Générer et appliquer les migrations Prisma :  
+3. Générer  les migrations Prisma et lancer prisma studio :  
    ```bash
    npx prisma generate
-   npx prisma migrate dev
+   npx prisma studio
    ```
-5. Lancer le projet :  
+4. Lancer le projet :  
    ```bash
    npm run dev
    # ou
@@ -98,6 +94,17 @@ NEXT_PUBLIC_API_BASE_URL=https://b0s0kwos00g48ow8cg0skg4w.89.116.111.143.sslip.i
    # ou
    yarn dev
    ```
+       
+5. Générer le client API avec Orval :  
+   ```bash
+   npm run orval
+   # ou
+   pnpm orval
+   # ou
+   yarn orval
+   ```
+
+
 
 ## 🛠️ Outils utilisés
 - **ChatGPT** : génération rapide de contenu (README, exemples de code), explications fonctionnelles et conseils sur l’organisation générale du projet.  
