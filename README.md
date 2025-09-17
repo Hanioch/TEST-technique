@@ -44,7 +44,8 @@ NEXT_PUBLIC_API_BASE_URL=https://b0s0kwos00g48ow8cg0skg4w.89.116.111.143.sslip.i
 3. Dans le dossier app, un dossier partie2 a été créé, comprenant un dossier anomalies et un dossier bulletins. Ces deux dossiers correspondent à des routes backend exploitables répondant aux objectifs 2 et 3.  
    *(Pour des raisons de simplicité d’accès, ce dossier partie2 a été placé directement dans app plutôt que dans app/api.)*
 
-### Partie 3  
+### Partie 3
+***il y a un bug quand on lance cette partie, le bug à été corrigé dans la branche 'correction-Partie3-start' créé après le temps de remise***
 **Objectif** :  
 1. Créer une interface web permettant de consulter les données via l’API.
 
