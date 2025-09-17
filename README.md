@@ -77,7 +77,12 @@ L’ajout du composant DataTable de shadcn, qui intègre une barre de recherche 
 DATABASE_URL="file:./universite_demo.sqlite"
 NEXT_PUBLIC_API_BASE_URL=https://b0s0kwos00g48ow8cg0skg4w.89.116.111.143.sslip.io
 ```
-3. Générer le client API avec Orval :  
+3. Générer  les migrations Prisma et lancer prisma studio :  
+   ```bash
+   npx prisma generate
+   npx prisma studio
+   ```
+4. Générer le client API avec Orval :  
    ```bash
    npm run orval
    # ou
@@ -85,11 +90,7 @@ NEXT_PUBLIC_API_BASE_URL=https://b0s0kwos00g48ow8cg0skg4w.89.116.111.143.sslip.i
    # ou
    yarn orval
    ```
-4. Générer et appliquer les migrations Prisma :  
-   ```bash
-   npx prisma generate
-   npx prisma migrate dev
-   ```
+
 5. Lancer le projet :  
    ```bash
    npm run dev
