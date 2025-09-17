@@ -9,6 +9,15 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { ScrollBar } from "@/components/ui/scroll-area";
 import { useState } from "react";
+import { useEffect } from "react";
+import {
+    Select,
+    SelectTrigger,
+    SelectContent,
+    SelectItem,
+    SelectValue,
+} from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 
 
 function useApi<T>(url: string) {
@@ -70,6 +79,9 @@ export default function Partie3() {
     const [notesSortOrder, setNotesSortOrder] = useState<"asc" | "desc">("asc");
 
     const [coursSortOrder, setCoursSortOrder] = useState<"asc" | "desc">("asc");
+
+    const [selectedAnomalyType, setSelectedAnomalyType] = useState<string | null>(null);
+
 
     if (loadingBulletins || loadingAnomalies || loadingInscriptions || loadingNotes || loadingCours) {
         return (
@@ -144,11 +156,6 @@ export default function Partie3() {
     const bulletinsYears = Array.from(new Set((bulletins ?? []).map(b => String(b.annee)))).sort();
     const inscriptionsYears = Array.from(new Set((inscriptions ?? []).map(i => String(i.annee_etude)))).sort();
 
-    // État pour le type d'anomalie sélectionné (desktop)
-    const [selectedAnomalyType, setSelectedAnomalyType] = useState<string | null>(
-        Object.keys(anomaliesByType)[0] ?? null
-    );
-
     return (
         <div className="container mx-auto p-6">
             <h1 className="text-2xl font-bold mb-6">📊 Tableau de bord</h1>
@@ -179,50 +186,64 @@ export default function Partie3() {
 
                 <TabsContent value="bulletins" className="mt-4">
                     <div className="mb-4 flex flex-wrap gap-4 items-center">
-                        <label>
-                            Trier par:{" "}
-                            <select
+                        <div className="flex flex-col">
+                            <span className="text-xs mb-1">Trier par</span>
+                            <Select
                                 value={bulletinsSortField}
-                                onChange={e => setBulletinsSortField(e.target.value as "moyenne" | "annee")}
-                                className="border rounded px-2 py-1"
+                                onValueChange={v => setBulletinsSortField(v as "moyenne" | "annee")}
                             >
-                                <option value="moyenne">Moyenne pondérée</option>
-                                <option value="annee">Année</option>
-                            </select>
-                        </label>
-                        <button
-                            onClick={() => setBulletinsSortOrder(bulletinsSortOrder === "asc" ? "desc" : "asc")}
-                            className="border rounded px-2 py-1"
-                        >
-                            Ordre: {bulletinsSortOrder === "asc" ? "Ascendant" : "Descendant"}
-                        </button>
-
-                        <label>
-                            Filtrer année:{" "}
-                            <select
+                                <SelectTrigger className="w-40">
+                                    <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="moyenne">Moyenne pondérée</SelectItem>
+                                    <SelectItem value="annee">Année</SelectItem>
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="text-xs mb-1">Ordre</span>
+                            <Button
+                                variant="outline"
+                                className="w-40"
+                                onClick={() => setBulletinsSortOrder(bulletinsSortOrder === "asc" ? "desc" : "asc")}
+                            >
+                                {bulletinsSortOrder === "asc" ? "Ascendant" : "Descendant"}
+                            </Button>
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="text-xs mb-1">Filtrer année</span>
+                            <Select
                                 value={bulletinsFilterAnnee}
-                                onChange={e => setBulletinsFilterAnnee(e.target.value)}
-                                className="border rounded px-2 py-1"
+                                onValueChange={v => setBulletinsFilterAnnee(v)}
                             >
-                                <option value="all">Tous</option>
-                                {bulletinsYears.map(y => (
-                                    <option key={y} value={y}>{y}</option>
-                                ))}
-                            </select>
-                        </label>
-
-                        <label>
-                            Filtrer réussite:{" "}
-                            <select
+                                <SelectTrigger className="w-32">
+                                    <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="all">Tous</SelectItem>
+                                    {bulletinsYears.map(y => (
+                                        <SelectItem key={y} value={y}>{y}</SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="text-xs mb-1">Filtrer réussite</span>
+                            <Select
                                 value={bulletinsFilterReussite}
-                                onChange={e => setBulletinsFilterReussite(e.target.value)}
-                                className="border rounded px-2 py-1"
+                                onValueChange={v => setBulletinsFilterReussite(v)}
                             >
-                                <option value="all">Tous</option>
-                                <option value="oui">Oui</option>
-                                <option value="non">Non</option>
-                            </select>
-                        </label>
+                                <SelectTrigger className="w-28">
+                                    <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="all">Tous</SelectItem>
+                                    <SelectItem value="oui">Oui</SelectItem>
+                                    <SelectItem value="non">Non</SelectItem>
+                                </SelectContent>
+                            </Select>
+                        </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  items-start">
                         {filteredBulletins.map((b: any) => (
@@ -265,25 +286,33 @@ export default function Partie3() {
 
                 <TabsContent value="inscriptions" className="mt-4">
                     <div className="mb-4 flex flex-wrap gap-4 items-center">
-                        <button
-                            onClick={() => setInscriptionsSortOrder(inscriptionsSortOrder === "asc" ? "desc" : "asc")}
-                            className="border rounded px-2 py-1"
-                        >
-                            Trier matricule: {inscriptionsSortOrder === "asc" ? "Ascendant" : "Descendant"}
-                        </button>
-                        <label>
-                            Filtrer année:{" "}
-                            <select
-                                value={inscriptionsFilterAnnee}
-                                onChange={e => setInscriptionsFilterAnnee(e.target.value)}
-                                className="border rounded px-2 py-1"
+                        <div className="flex flex-col">
+                            <span className="text-xs mb-1">Trier matricule</span>
+                            <Button
+                                variant="outline"
+                                className="w-40"
+                                onClick={() => setInscriptionsSortOrder(inscriptionsSortOrder === "asc" ? "desc" : "asc")}
                             >
-                                <option value="all">Tous</option>
-                                {inscriptionsYears.map(y => (
-                                    <option key={y} value={y}>{y}</option>
-                                ))}
-                            </select>
-                        </label>
+                                {inscriptionsSortOrder === "asc" ? "Ascendant" : "Descendant"}
+                            </Button>
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="text-xs mb-1">Filtrer année</span>
+                            <Select
+                                value={inscriptionsFilterAnnee}
+                                onValueChange={v => setInscriptionsFilterAnnee(v)}
+                            >
+                                <SelectTrigger className="w-32">
+                                    <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="all">Tous</SelectItem>
+                                    {inscriptionsYears.map(y => (
+                                        <SelectItem key={y} value={y}>{y}</SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {filteredInscriptions.map((i: any) => {
@@ -309,23 +338,31 @@ export default function Partie3() {
 
                 <TabsContent value="notes" className="mt-4">
                     <div className="mb-4 flex flex-wrap gap-4 items-center">
-                        <label>
-                            Trier par:{" "}
-                            <select
+                        <div className="flex flex-col">
+                            <span className="text-xs mb-1">Trier par</span>
+                            <Select
                                 value={notesSortField}
-                                onChange={e => setNotesSortField(e.target.value as "note" | "matricule")}
-                                className="border rounded px-2 py-1"
+                                onValueChange={v => setNotesSortField(v as "note" | "matricule")}
                             >
-                                <option value="note">Note</option>
-                                <option value="matricule">Matricule</option>
-                            </select>
-                        </label>
-                        <button
-                            onClick={() => setNotesSortOrder(notesSortOrder === "asc" ? "desc" : "asc")}
-                            className="border rounded px-2 py-1"
-                        >
-                            Ordre: {notesSortOrder === "asc" ? "Ascendant" : "Descendant"}
-                        </button>
+                                <SelectTrigger className="w-32">
+                                    <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="note">Note</SelectItem>
+                                    <SelectItem value="matricule">Matricule</SelectItem>
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="text-xs mb-1">Ordre</span>
+                            <Button
+                                variant="outline"
+                                className="w-32"
+                                onClick={() => setNotesSortOrder(notesSortOrder === "asc" ? "desc" : "asc")}
+                            >
+                                {notesSortOrder === "asc" ? "Ascendant" : "Descendant"}
+                            </Button>
+                        </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {sortedNotes.map((n: any) => (
@@ -345,12 +382,16 @@ export default function Partie3() {
 
                 <TabsContent value="cours" className="mt-4">
                     <div className="mb-4 flex flex-wrap gap-4 items-center">
-                        <button
-                            onClick={() => setCoursSortOrder(coursSortOrder === "asc" ? "desc" : "asc")}
-                            className="border rounded px-2 py-1"
-                        >
-                            Trier crédit: {coursSortOrder === "asc" ? "Ascendant" : "Descendant"}
-                        </button>
+                        <div className="flex flex-col">
+                            <span className="text-xs mb-1">Trier crédit</span>
+                            <Button
+                                variant="outline"
+                                className="w-40"
+                                onClick={() => setCoursSortOrder(coursSortOrder === "asc" ? "desc" : "asc")}
+                            >
+                                {coursSortOrder === "asc" ? "Ascendant" : "Descendant"}
+                            </Button>
+                        </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {sortedCours.map((c: any) => (
@@ -399,8 +440,8 @@ export default function Partie3() {
                                 <button
                                     key={type}
                                     className={`px-4 py-2 rounded text-left border transition-colors ${selectedAnomalyType === type
-                                            ? "bg-gray-200 border-gray-400 font-medium"
-                                            : "bg-white border-gray-300 hover:bg-gray-100"
+                                        ? "bg-gray-200 border-gray-400 font-medium"
+                                        : "bg-white border-gray-300 hover:bg-gray-100"
                                         }`}
                                     onClick={() => setSelectedAnomalyType(type)}
                                 >
@@ -423,8 +464,10 @@ export default function Partie3() {
                                         </CardContent>
                                     </Card>
                                 ))
-                            ) : (
+                            ) : selectedAnomalyType ? (
                                 <p className="text-gray-500">Aucune anomalie pour ce type.</p>
+                            ) : (
+                                <p className="text-gray-500">Aucun type sélectionné.</p>
                             )}
                         </div>
                     </div>
