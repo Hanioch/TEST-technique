@@ -1,5 +1,22 @@
 # 📘 Projet – Épreuve technique (Université Demo)
 
+## BUG PARTIE 3 
+
+**Erreur rencontré**
+
+```
+React has detected a change in the order of Hooks called by Partie3. This will lead to bugs and errors if not fixed. For more information, read the Rules of Hooks: https://react.dev/link/rules-of-hook
+```
+---
+**Cause** :
+Par manque d’attention, j’avais créé un useState avec une valeur qui n’était pas encore initialisée. Comme le state se retrouvait quand même avec une valeur, le bug n’était pas visible pendant le développement. Je l’ai remarqué uniquement en relançant le projet.
+
+**Solution** : 
+J’ai attribué une valeur null par défaut à ce state lors de l’initialisation, ce qui a corrigé le problème.
+
+**Amélioration additionnelle** :
+J’ai également transformé les filtres et tris en composants shadcn/ui pour plus de cohérence dans l’UI et un meilleur UX.
+
 ## Développement
 Ce projet a été réalisé en utilisant Next.js, tant pour le backend que pour le frontend, avec Prisma pour la gestion de la base de données.
 
